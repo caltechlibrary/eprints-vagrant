@@ -113,7 +113,7 @@ Vagrant.configure(2) do |config|
 
     # Wrapping up
     echo ''
-    echo ' Make sure we restart MySQL'
+    echo ' Make sure we start MySQL'
     echo ''
     echo '  sudo systemctl start mysqld.service'
     echo ''
@@ -124,6 +124,8 @@ Vagrant.configure(2) do |config|
     echo '  ./bin/epadmin create'
     echo ''
     echo 'After creating an E-Prints repository restart apache'
+    echo ''
+    echo '  sudo systemctl restart httpd.service'
     echo ''
   SHELL
 end
