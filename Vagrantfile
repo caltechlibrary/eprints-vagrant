@@ -25,13 +25,13 @@ Vagrant.configure(2) do |config|
   # config.vm.network "forwarded_port", guest: 80, host: 8080
 
   # forward the public admin site
-  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  #config.vm.network "forwarded_port", guest: 8080, host: 8080
   # forward the public website
-  config.vm.network "forwarded_port", guest: 8081, host: 8081
+  #config.vm.network "forwarded_port", guest: 8081, host: 8081
   # forward the API
-  config.vm.network "forwarded_port", guest: 8089, host: 8089
+  #config.vm.network "forwarded_port", guest: 8089, host: 8089
   # forward the Solr admin site
-  config.vm.network "forwarded_port", guest: 8090, host: 8090
+  #config.vm.network "forwarded_port", guest: 8090, host: 8090
   # forward NginX
   #config.vm.network "forwarded_port", guest: 80, host: 8000
   #config.vm.network "forwarded_port", guest: 443, host: 8443
@@ -96,7 +96,9 @@ Vagrant.configure(2) do |config|
     sudo /sbin/chkconfig httpd on
     sudo yum install mysql mysql-server
     sudo /sbin/chkconfig mysqld on
+    sudo yum upgrade libxml2 libxslt 
     sudo yum install perl
+    sudo yum install perl-XML-LibXML perl-XML-LibXSLT perl-DBI
     sudo yum install mod_perl
     sudo yum install gdome2 gdome2-devel
     sudo yum install perl-Unicode-String
@@ -113,7 +115,6 @@ Vagrant.configure(2) do |config|
     # Install E-Prints
     sudo rpm -ivh http://rpm.eprints.org/rpm-eprints-org-key-1-1.noarch.rpm
     sudo rpm -ivh http://rpm.eprints.org/eprints/noarch/rpm-eprints-org-1-1.noarch.rpm
-    sudo yum upgrade libxml2 libxslt perl-XML-LibXML perl-XML-LibXSLT perl-DBI
     sudo yum install eprints # 3.3.x and later
   SHELL
 end
