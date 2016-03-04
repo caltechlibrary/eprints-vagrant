@@ -25,8 +25,8 @@ Vagrant.configure(2) do |config|
   # config.vm.network "forwarded_port", guest: 80, host: 8080
 
   # forward the public E-Prints site
-  config.vm.network "forwarded_port", guest: 80, host: 8000
-  #config.vm.network "forwarded_port", guest: 443, host: 8443
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 81, host: 8081
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -116,13 +116,13 @@ Vagrant.configure(2) do |config|
     echo ''
     echo '      sudo systemctl start mysqld.service'
     echo ''
-    echo 'Do the following to finish setup.'
+    echo ' Do the following to finish setup.'
     echo ''
     echo '      cd /usr/share/eprints'
     echo '      sudo su eprints'
     echo '      ./bin/epadmin create'
     echo ''
-    echo 'After creating an E-Prints repository restart apache'
+    echo ' After creating an E-Prints repository restart apache'
     echo ''
     echo '      sudo systemctl restart httpd.service'
     echo ''
