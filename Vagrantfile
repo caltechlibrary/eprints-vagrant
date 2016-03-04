@@ -24,17 +24,9 @@ Vagrant.configure(2) do |config|
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network "forwarded_port", guest: 80, host: 8080
 
-  # forward the public admin site
-  #config.vm.network "forwarded_port", guest: 8080, host: 8080
-  # forward the public website
-  #config.vm.network "forwarded_port", guest: 8081, host: 8081
-  # forward the API
-  #config.vm.network "forwarded_port", guest: 8089, host: 8089
-  # forward the Solr admin site
-  #config.vm.network "forwarded_port", guest: 8090, host: 8090
-  # forward NginX
-  #config.vm.network "forwarded_port", guest: 80, host: 8000
-  #config.vm.network "forwarded_port", guest: 443, host: 8443
+  # forward the public E-Prints site
+  config.vm.network "forwarded_port", guest: 80, host: 8000
+  config.vm.network "forwarded_port", guest: 443, host: 8443
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -98,6 +90,7 @@ Vagrant.configure(2) do |config|
     sudo yum -y install libxslt
     sudo yum -y install httpd
     sudo /sbin/chkconfig httpd on
+    sudo rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
     sudo yum -y install mysql mysql-server
     sudo /sbin/chkconfig mysqld on
     sudo yum -y install perl
@@ -106,36 +99,31 @@ Vagrant.configure(2) do |config|
     sudo yum -y install perl-XML-LibXSLT
     sudo yum -y install perl-DBI
     sudo yum -y install perl-Unicode-String
-    sudo yum install xpdf
-    sudo yum install lynx
-    sudo yum install tetex-latex
-    sudo yum install ImageMagick
+    sudo yum -y install xpdf
+    sudo yum -y install lynx
+    sudo yum -y install tetex-latex
+    sudo yum -y install ImageMagick
+    
+
     # Install E-Prints
     sudo rpm -ivh http://rpm.eprints.org/rpm-eprints-org-key-1-1.noarch.rpm
     sudo rpm -ivh http://rpm.eprints.org/eprints/noarch/rpm-eprints-org-1-1.noarch.rpm
-    sudo yum upgrade libxml2 libxslt perl-XML-LibXML perl-XML-LibXSLT
-    sudo yum install eprints # 3.3.x and later
+    # sudo yum -y upgrade libxml2 libxslt perl-XML-LibXML perl-XML-LibXSLT
+    sudo yum -y install eprints # 3.3.x and later
 
-    # sudo yum -y install gdome2 gdome2-devel
-    # wget http://cpan.uwinnipeg.ca/cpan/authors/id/T/TJ/TJMATHER/XML-GDOME-0.86.tar.gz
-    # tar xzvf XML-GDOME-0.86.tar.gz
-    # cd XML-GDOME-0.86/
-    # perl Makefile.PL
-    # make
-    # sudo make install
-    # # Install E-Prints
-    # sudo rpm -ivh http://rpm.eprints.org/rpm-eprints-org-key-1-1.noarch.rpm
-    # sudo rpm -ivh http://rpm.eprints.org/eprints/noarch/rpm-eprints-org-1-1.noarch.rpm
-    # sudo yum install eprints # 3.3.x and later
-    echo <<EOF
-Wrote /usr/share/eprints/cfg/apache.conf
-Wrote /usr/share/eprints/cfg/apache_ssl.conf
-
-Add the following line to your apache configuration:
-	Include /usr/share/eprints/cfg/apache.conf
-
-You must restart apache for any changes to take effect!
-
-EOF
+    # Wrapping up
+    echo ''
+    echo ' Make sure we restart MySQL'
+    echo ''
+    echo '  sudo systemctl start mysqld.service'
+    echo ''
+    echo 'Do the following to finish setup.'
+    echo ''
+    echo '  cd /usr/share/eprints'
+    echo '  sudo su eprints'
+    echo '  ./bin/epadmin create'
+    echo ''
+    echo 'After creating an E-Prints repository restart apache'
+    echo ''
   SHELL
 end
