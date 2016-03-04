@@ -113,7 +113,7 @@ Vagrant.configure(2) do |config|
     # Install E-Prints
     sudo rpm -ivh http://rpm.eprints.org/rpm-eprints-org-key-1-1.noarch.rpm
     sudo rpm -ivh http://rpm.eprints.org/eprints/noarch/rpm-eprints-org-1-1.noarch.rpm
-    sudo yum upgrade libxml2 libxslt perl-XML-LibXML perl-XML-LibXSLT
+    sudo yum upgrade libxml2 libxslt perl-XML-LibXML perl-XML-LibXSLT perl-DBI
     sudo yum install eprints # 3.3.x and later
   SHELL
 end
