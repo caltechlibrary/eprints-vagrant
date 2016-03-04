@@ -105,12 +105,18 @@ Vagrant.configure(2) do |config|
     sudo yum -y install perl-XML-LibXML
     sudo yum -y install perl-XML-LibXSLT
     sudo yum -y install perl-DBI
-    sudo yum -y install gdome2 gdome2-devel
     sudo yum -y install perl-Unicode-String
     sudo yum install xpdf
     sudo yum install lynx
     sudo yum install tetex-latex
     sudo yum install ImageMagick
+    # Install E-Prints
+    sudo rpm -ivh http://rpm.eprints.org/rpm-eprints-org-key-1-1.noarch.rpm
+    sudo rpm -ivh http://rpm.eprints.org/eprints/noarch/rpm-eprints-org-1-1.noarch.rpm
+    sudo yum upgrade libxml2 libxslt perl-XML-LibXML perl-XML-LibXSLT
+    sudo yum install eprints # 3.3.x and later
+
+    # sudo yum -y install gdome2 gdome2-devel
     # wget http://cpan.uwinnipeg.ca/cpan/authors/id/T/TJ/TJMATHER/XML-GDOME-0.86.tar.gz
     # tar xzvf XML-GDOME-0.86.tar.gz
     # cd XML-GDOME-0.86/
@@ -121,5 +127,15 @@ Vagrant.configure(2) do |config|
     # sudo rpm -ivh http://rpm.eprints.org/rpm-eprints-org-key-1-1.noarch.rpm
     # sudo rpm -ivh http://rpm.eprints.org/eprints/noarch/rpm-eprints-org-1-1.noarch.rpm
     # sudo yum install eprints # 3.3.x and later
+    echo <<EOF
+Wrote /usr/share/eprints/cfg/apache.conf
+Wrote /usr/share/eprints/cfg/apache_ssl.conf
+
+Add the following line to your apache configuration:
+	Include /usr/share/eprints/cfg/apache.conf
+
+You must restart apache for any changes to take effect!
+
+EOF
   SHELL
 end
