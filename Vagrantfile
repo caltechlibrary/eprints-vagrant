@@ -25,8 +25,8 @@ Vagrant.configure(2) do |config|
   # config.vm.network "forwarded_port", guest: 80, host: 8080
 
   # forward the public E-Prints site
-  config.vm.network "forwarded_port", guest: 8000, host: 8000
-  #config.vm.network "forwarded_port", guest: 8443, host: 8443
+  config.vm.network "forwarded_port", guest: 80, host: 8000
+  #config.vm.network "forwarded_port", guest: 443, host: 8443
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -103,7 +103,6 @@ Vagrant.configure(2) do |config|
     sudo yum -y install lynx
     sudo yum -y install tetex-latex
     sudo yum -y install ImageMagick
-    
 
     # Install E-Prints
     sudo rpm -ivh http://rpm.eprints.org/rpm-eprints-org-key-1-1.noarch.rpm
@@ -115,17 +114,18 @@ Vagrant.configure(2) do |config|
     echo ''
     echo ' Make sure we start MySQL'
     echo ''
-    echo '  sudo systemctl start mysqld.service'
+    echo '      sudo systemctl start mysqld.service'
     echo ''
     echo 'Do the following to finish setup.'
     echo ''
-    echo '  cd /usr/share/eprints'
-    echo '  sudo su eprints'
-    echo '  ./bin/epadmin create'
+    echo '      cd /usr/share/eprints'
+    echo '      sudo su eprints'
+    echo '      ./bin/epadmin create'
     echo ''
     echo 'After creating an E-Prints repository restart apache'
     echo ''
-    echo '  sudo systemctl restart httpd.service'
+    echo '      sudo systemctl restart httpd.service'
     echo ''
+    echo '...'
   SHELL
 end
