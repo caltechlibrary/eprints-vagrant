@@ -25,8 +25,7 @@ Vagrant.configure(2) do |config|
   # config.vm.network "forwarded_port", guest: 80, host: 8080
 
   # forward the public E-Prints site
-  config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.network "forwarded_port", guest: 81, host: 8081
+  config.vm.network "forwarded_port", guest: 80, host: 80
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
