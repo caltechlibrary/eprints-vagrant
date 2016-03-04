@@ -92,29 +92,34 @@ Vagrant.configure(2) do |config|
   # SHELL
   config.vm.provision "shell", inline: <<-SHELL
     # Install required software
-    sudo yum install httpd
+    sudo yum -y install epel-release
+    sudo yum -y install deltarpm
+    sudo yum -y install libxml2
+    sudo yum -y install libxslt
+    sudo yum -y install httpd
     sudo /sbin/chkconfig httpd on
-    sudo yum install mysql mysql-server
+    sudo yum -y install mysql mysql-server
     sudo /sbin/chkconfig mysqld on
-    sudo yum upgrade libxml2 libxslt 
-    sudo yum install perl
-    sudo yum install perl-XML-LibXML perl-XML-LibXSLT perl-DBI
-    sudo yum install mod_perl
-    sudo yum install gdome2 gdome2-devel
-    sudo yum install perl-Unicode-String
-    sudo wget http://cpan.uwinnipeg.ca/cpan/authors/id/T/TJ/TJMATHER/XML-GDOME-0.86.tar.gz
-    sudo tar xzvf XML-GDOME-0.86.tar.gz
-    sudo cd XML-GDOME-0.86/
-    sudo perl Makefile.PL
-    sudo make
-    sudo make install
+    sudo yum -y install perl
+    sudo yum -y install mod_perl
+    sudo yum -y install perl-XML-LibXML
+    sudo yum -y install perl-XML-LibXSLT
+    sudo yum -y install perl-DBI
+    sudo yum -y install gdome2 gdome2-devel
+    sudo yum -y install perl-Unicode-String
     sudo yum install xpdf
     sudo yum install lynx
     sudo yum install tetex-latex
     sudo yum install ImageMagick
-    # Install E-Prints
-    sudo rpm -ivh http://rpm.eprints.org/rpm-eprints-org-key-1-1.noarch.rpm
-    sudo rpm -ivh http://rpm.eprints.org/eprints/noarch/rpm-eprints-org-1-1.noarch.rpm
-    sudo yum install eprints # 3.3.x and later
+    # wget http://cpan.uwinnipeg.ca/cpan/authors/id/T/TJ/TJMATHER/XML-GDOME-0.86.tar.gz
+    # tar xzvf XML-GDOME-0.86.tar.gz
+    # cd XML-GDOME-0.86/
+    # perl Makefile.PL
+    # make
+    # sudo make install
+    # # Install E-Prints
+    # sudo rpm -ivh http://rpm.eprints.org/rpm-eprints-org-key-1-1.noarch.rpm
+    # sudo rpm -ivh http://rpm.eprints.org/eprints/noarch/rpm-eprints-org-1-1.noarch.rpm
+    # sudo yum install eprints # 3.3.x and later
   SHELL
 end
