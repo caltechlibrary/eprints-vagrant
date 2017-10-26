@@ -34,22 +34,11 @@ This steps are run as root (e.g. `sudo su`).
     cd /opt/eprints3
     git checkout v3.3.15
     chown -R eprints:eprints .
-    cat <<EOT >>/etc/bash.bashrc
-
-    #
-    # EPrints Environment Settings for startup.
-    #
-    export APACHE_RUN_USER=eprints
-    export APACHE_RUN_GROUP=eprints
-
-    EOT
-
     export APACHE_RUN_USER=eprints
     export APACHE_RUN_GROUP=eprints
     echo 'Include /opt/eprints3/cfg/apache.conf' > /etc/apache2/sites-available/eprints.conf
     a2ensite eprints
-    apachectl restart
-    cd /opt/eprints3
+    systemctl restart apache2.service
     su eprints
     ./bin/epadmin create
     exit
