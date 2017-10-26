@@ -28,18 +28,18 @@ Now you should be ready for the final manual bits.
 
 ### Now install EPrints from source
 
-This steps are run as root (e.g. `sudo su`).
+These steps are run as root (e.g. `sudo su`).
 
 ```shell
     git clone https://github.com/eprints/eprints.git /opt/eprints3
     cd /opt/eprints3
     git checkout tags/v3.3.15
-    chown -R eprints:eprints .
     autoreconf
     automake --add-missing
     autoconf
     ./configure --prefix=$PWD
     # FIXME: Need to setup MariaDB access from eprints account
+    chown -R eprints:eprints .
     su eprints
     ./bin/epadmin create
     exit
