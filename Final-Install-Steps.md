@@ -38,7 +38,6 @@ This steps are run as root (e.g. `sudo su`).
     export APACHE_RUN_GROUP=eprints
     echo 'Include /opt/eprints3/cfg/apache.conf' > /etc/apache2/sites-available/eprints.conf
     a2ensite eprints
-    systemctl restart apache2.service
     su eprints
     ./bin/epadmin create
     exit
@@ -50,7 +49,7 @@ to both your dev machines /etc/hosts and the vagrant /etc/hosts if needed.
 After creating an E-Prints repository and updating /etc/hosts file restart apache
 
 ```shell
-    systemctl restart httpd.service
+    systemctl restart apache2.service
 ```
 
 The EPrints configuration still interact with your MariaDB install. Makesure
