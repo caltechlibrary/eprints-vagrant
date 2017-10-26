@@ -22,13 +22,14 @@ On my development box
 ```
     git clone git@github.com:rsdoiel/eprints-vagrant
     cd eprints-vagrant
-    vagrant up && vagrant ssh
+    vagrant up 
+    vagrant ssh
 ```
 
 ## Final Install Steps
 
-After vagrant comes up the "vagrant ssh" logs me into the vagrant instance. EPrint's isn't installed. You
-want to follow the final steps in [Final-Install-Steps.md](Final-Install-Steps.md). The EPrints Install docs are
+After vagrant comes up the "vagrant ssh" logs into the vagrant instance. EPrints isn't installed. But the pre-requisites are.
+You want to follow the final steps in [Final-Install-Steps.md](Final-Install-Steps.md). The EPrints Install docs are
 authorative and you can find them at http://wiki.eprints.org/w/Installing_EPrints_on_Debian/Ubuntu.
 
 ## Additional Options for your vagrant Host machine
