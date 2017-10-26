@@ -91,16 +91,6 @@ Vagrant.configure("2") do |config|
         libterm-readkey-perl libmime-lite-perl libmime-types-perl libdigest-sha-perl libdbd-mysql-perl libxml-parser-perl libxml2-dev \
         libxml-twig-perl libarchive-any-perl libjson-perl lynx wget ghostscript xpdf antiword elinks pdftk texlive-base texlive-base-bin \
         psutils imagemagick adduser tar gzip mariadb-server mariadb-client unzip libsearch-xapian-perl git -y
-    git clone https://github.com/eprints/eprints.git /opt/eprints3
-    cd /opt/eprints3
-    git checkout tags/v3.3.16
-    chown -R eprints:eprints .
-    export APACHE_RUN_USER=eprints
-    export APACHE_RUN_GROUP=eprints
-    echo 'Include /opt/eprints3/cfg/apache.conf' > /etc/apache2/sites-available/eprints.conf
-    a2ensite eprints
-    apachectl restart
-    systemctl restart mariadb.service
 SHELL
 
 end

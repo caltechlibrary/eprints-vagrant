@@ -21,6 +21,10 @@ You could perform them on manually if you needed.
     sudo useradd eprints
 ```
 
+Now you should be ready for the final manual bits.
+
+## Final steps requiring manual interaction
+
 ### Now install EPrints from source
 
 This steps are run as root (i.e. `sudo su`).
@@ -35,19 +39,8 @@ This steps are run as root (i.e. `sudo su`).
      echo 'Include /opt/eprints3/cfg/apache.conf' > /etc/apache2/sites-available/eprints.conf
      a2ensite eprints
      apachectl restart
-```
-
-Now you should be ready for the final manual bits.
-
-## Final steps require manual interaction
-
-SSH into your vagrant instance (e.g. `vagrant ssh`)
-
-Do the following to finish setup.
-
-```shell
      cd /opt/eprints3
-     sudo su eprints
+     su eprints
      ./bin/epadmin create
      exit
 ```
@@ -58,14 +51,14 @@ to both your dev machines /etc/hosts and the vagrant /etc/hosts if needed.
 After creating an E-Prints repository and updating /etc/hosts file restart apache
 
 ```shell
-    sudo systemctl restart httpd.service
+    systemctl restart httpd.service
 ```
 
 The EPrints configuration still interact with your MariaDB install. Makesure
 it is still up.
 
 ```shell
-     sudo systemctl restart mariadb.service
+    systemctl restart mariadb.service
 ```
 
 Point your browser at your EPrints and install for testing/development.
