@@ -3,8 +3,8 @@
 
 ## Inline steps taken by the Vagrant file
 
-The following are done by the Vagrant file as an in-line shell. They are provided here as reference.
-You could perform them on manually if you needed.
+The following are done by the `vagrant up` command via in-line shell directive in Vagrantfile. 
+They are provided here as reference.  You could perform them on manually if you needed.
 
 ### Install required software
 
@@ -15,7 +15,7 @@ You could perform them on manually if you needed.
         psutils imagemagick adduser tar gzip mariadb-server mariadb-client unzip libsearch-xapian-perl git -y
 ```
 
-### Create a new eprints user
+### Create a new EPrints user
 
 ```shell
     sudo useradd eprints
@@ -23,17 +23,27 @@ You could perform them on manually if you needed.
 
 Now you should be ready for the final manual bits.
 
-## Final steps requiring manual interaction
+## The Final Steps
 
 ### Now install EPrints from source
 
-This steps are run as root (i.e. `sudo su`).
+This steps are run as root (e.g. `sudo su`).
 
 ```shell
      git clone https://github.com/eprints/eprints.git /opt/eprints3
      cd /opt/eprints3
      git checkout tags/v3.3.16
      chown -R eprints:eprints .
+     cat <<EOT >>/etc/bash.bashrc
+
+     #
+     # EPrints Environment Settings for startup.
+     #
+     export APACHE_RUN_USER=eprints
+     export APACHE_RUN_GROUP=eprints
+
+     EOT
+
      export APACHE_RUN_USER=eprints
      export APACHE_RUN_GROUP=eprints
      echo 'Include /opt/eprints3/cfg/apache.conf' > /etc/apache2/sites-available/eprints.conf
