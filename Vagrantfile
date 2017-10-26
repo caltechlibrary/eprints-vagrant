@@ -5,15 +5,14 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-Vagrant.configure(2) do |config|
+Vagrant.configure("2") do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
   # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
-  #config.vm.box = "centos/7"
-  config.vm.box = "bento/centos-7.2"
+  # boxes at https://vagrantcloud.com/search.
+  #config.vm.box = "base"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -23,16 +22,17 @@ Vagrant.configure(2) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
+  # NOTE: This will enable public access to the opened port
   # config.vm.network "forwarded_port", guest: 80, host: 8080
 
-  # forward the public E-Prints site
-  #config.vm.network "forwarded_port", guest: 80, host: 8000
-  #config.vm.network "forwarded_port", guest: 8080, host: 8080
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine and only allow access
+  # via 127.0.0.1 to disable public access
+  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
-  config.vm.network "private_network", type: "dhcp"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -59,6 +59,22 @@ Vagrant.configure(2) do |config|
   #
   # View the documentation for the provider you are using for more
   # information on available options.
+
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   apt-get update
+  #   apt-get install -y apache2
+  # SHELL
+
+    
+  #
+  # Ubuntu instance to host EPrints 3.3.x for development
+  #
+  config.vm.network "private_network", type: "dhcp"
+
+  config.vm.box = "ubuntu/xenial64"
   config.vm.provider "virtualbox" do |vb|
    # Display the VirtualBox GUI when booting the machine
    vb.gui = false
@@ -69,67 +85,22 @@ Vagrant.configure(2) do |config|
    vb.customize ["modifyvm", :id, "--vram", "128"]
   end
 
-  # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
-  # such as FTP and Heroku are also available. See the documentation at
-  # https://docs.vagrantup.com/v2/push/atlas.html for more information.
-  # config.push.define "atlas" do |push|
-  #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
-  # end
-
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
-  # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   sudo apt-get update
-  #   sudo apt-get install -y apache2
-  # SHELL
   config.vm.provision "shell", inline: <<-SHELL
-    # Install required software
-    sudo yum -y install epel-release
-    sudo yum -y install deltarpm
-    sudo yum -y install libxml2
-    sudo yum -y install libxslt
-    sudo yum -y install httpd
-    sudo /sbin/chkconfig httpd on
-    sudo rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
-    sudo yum -y install mysql mysql-server
-    sudo /sbin/chkconfig mysqld on
-    sudo yum -y install perl
-    sudo yum -y install mod_perl
-    sudo yum -y install perl-XML-LibXML
-    sudo yum -y install perl-XML-LibXSLT
-    sudo yum -y install perl-DBI
-    sudo yum -y install perl-Unicode-String
-    sudo yum -y install xpdf
-    sudo yum -y install lynx
-    sudo yum -y install tetex-latex
-    sudo yum -y install ImageMagick
+    apt-get update
+    apt-get install perl libncurses5 libselinux1 libsepol1 apache2 libapache2-mod-perl2 libxml-libxml-perl libunicode-string-perl \
+        libterm-readkey-perl libmime-lite-perl libmime-types-perl libdigest-sha-perl libdbd-mysql-perl libxml-parser-perl libxml2-dev \
+        libxml-twig-perl libarchive-any-perl libjson-perl lynx wget ghostscript xpdf antiword elinks pdftk texlive-base texlive-base-bin \
+        psutils imagemagick adduser tar gzip mariadb-server mariadb-client unzip libsearch-xapian-perl git -y
+    git clone https://github.com/eprints/eprints.git /opt/eprints3
+    cd /opt/eprints3
+    git checkout tags/v3.3.16
+    chown -R eprints:eprints .
+    export APACHE_RUN_USER=eprints
+    export APACHE_RUN_GROUP=eprints
+    echo 'Include /opt/eprints3/cfg/apache.conf' > /etc/apache2/sites-available/eprints.conf
+    a2ensite eprints
+    apachectl restart
+    systemctl restart mariadb.service
+SHELL
 
-    # Install E-Prints
-    sudo rpm -ivh http://rpm.eprints.org/rpm-eprints-org-key-1-1.noarch.rpm
-    sudo rpm -ivh http://rpm.eprints.org/eprints/noarch/rpm-eprints-org-1-1.noarch.rpm
-    # sudo yum -y upgrade libxml2 libxslt perl-XML-LibXML perl-XML-LibXSLT
-    sudo yum -y install eprints # 3.3.x and later
-
-    # Wrapping up
-    echo ''
-    echo ' Make sure we start MySQL'
-    echo ''
-    echo '      sudo systemctl start mysqld.service'
-    echo ''
-    echo ' Do the following to finish setup.'
-    echo ''
-    echo '      cd /usr/share/eprints'
-    echo '      sudo su eprints'
-    echo '      ./bin/epadmin create'
-    echo ''
-    echo ' Note the hostname info you created when setting up the repository. Add it '
-    echo ' to both your dev machines /etc/hosts and the vagrant /etc/hosts if needed.'
-    echo ''
-    echo ' After creating an E-Prints repository and updating /etc/hosts file restart apache'
-    echo ''
-    echo '      sudo systemctl restart httpd.service'
-    echo ''
-    echo '...'
-  SHELL
 end

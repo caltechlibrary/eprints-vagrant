@@ -1,5 +1,9 @@
 
-# An E-Prints Development VM
+# An EPrints 3.3 Development VM
+
+## Requirement
+
++ Vagrant 2.x or better
 
 ## Outline
 
@@ -21,26 +25,15 @@ On my development box
     vagrant up && vagrant ssh
 ```
 
-After vagrant comes up the "vagrant ssh" logs me into the vagrant instance. I still need
-to follow the steps displayed at the end of that process. Here's a more verbose version
-of those steps.
+## Final Install Steps
 
-From there make sure we start MySQL
+After vagrant comes up the "vagrant ssh" logs me into the vagrant instance. EPrint's isn't installed. You
+want to follow the final steps in [Final-Install-Steps.md](Final-Install-Steps.md). The EPrints Install docs are
+authorative and you can find them at http://wiki.eprints.org/w/Installing_EPrints_on_Debian/Ubuntu.
 
-```
-    sudo systemctl start mysqld.service
-```
+## Additional Options for your vagrant Host machine
 
-Then finish the eprints install as you would on a non-vagrant setup.
-
-```
-      cd /usr/share/eprints
-      sudo su eprints
-      ./bin/epadmin create
-      exit
-```
-
-In the _epadmin create_ process you'll create the MySQL database setup but
+In the _epadmin create_ process you'll create the MariaDB database setup but
 also generate the Apache Virtual Host include information. It is important that
 these be visible on your network.  On my dev box I needed to add the IP address
 assigned by Virtual Box to my /etc/hosts on both the vagrant instance and my
