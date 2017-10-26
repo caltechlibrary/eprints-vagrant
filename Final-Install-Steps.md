@@ -1,5 +1,5 @@
 
-# EPrints 3.3.16 Install Notes
+# EPrints v3.3.15 Install Notes
 
 ## Inline steps taken by the Vagrant file
 
@@ -15,11 +15,11 @@ They are provided here as reference.  You could perform them on manually if you 
         psutils imagemagick adduser tar gzip mariadb-server mariadb-client unzip libsearch-xapian-perl git -y
 ```
 
-### Create a new EPrints user
+### Create EPrints user/group
 
 ```shell
-    sudo useradd eprints
-```
+    sudo useradd --system --create-home --user-group eprints
+```        
 
 Now you should be ready for the final manual bits.
 
@@ -30,29 +30,29 @@ Now you should be ready for the final manual bits.
 This steps are run as root (e.g. `sudo su`).
 
 ```shell
-     git clone https://github.com/eprints/eprints.git /opt/eprints3
-     cd /opt/eprints3
-     git checkout tags/v3.3.16
-     chown -R eprints:eprints .
-     cat <<EOT >>/etc/bash.bashrc
+    git clone https://github.com/eprints/eprints.git /opt/eprints3
+    cd /opt/eprints3
+    git checkout v3.3.15
+    chown -R eprints:eprints .
+    cat <<EOT >>/etc/bash.bashrc
 
-     #
-     # EPrints Environment Settings for startup.
-     #
-     export APACHE_RUN_USER=eprints
-     export APACHE_RUN_GROUP=eprints
+    #
+    # EPrints Environment Settings for startup.
+    #
+    export APACHE_RUN_USER=eprints
+    export APACHE_RUN_GROUP=eprints
 
-     EOT
+    EOT
 
-     export APACHE_RUN_USER=eprints
-     export APACHE_RUN_GROUP=eprints
-     echo 'Include /opt/eprints3/cfg/apache.conf' > /etc/apache2/sites-available/eprints.conf
-     a2ensite eprints
-     apachectl restart
-     cd /opt/eprints3
-     su eprints
-     ./bin/epadmin create
-     exit
+    export APACHE_RUN_USER=eprints
+    export APACHE_RUN_GROUP=eprints
+    echo 'Include /opt/eprints3/cfg/apache.conf' > /etc/apache2/sites-available/eprints.conf
+    a2ensite eprints
+    apachectl restart
+    cd /opt/eprints3
+    su eprints
+    ./bin/epadmin create
+    exit
 ```
 
 Note the hostname info you created when setting up the repository. Add it
