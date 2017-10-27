@@ -95,9 +95,9 @@ Vagrant.configure("2") do |config|
         libxml2-dev libxml-twig-perl libarchive-any-perl libjson-perl \
         lynx wget ghostscript xpdf antiword elinks pdftk texlive-base \
         texlive-base-bin psutils imagemagick adduser tar gzip \
-        mysql-server mysql-client unzip libsearch-xapian-perl \
+        mariadb-server mariadb-client unzip libsearch-xapian-perl \
         git autoconf autoconf-archive aptitude
-    useradd --system --create-home --user-group eprints
+    useradd eprints
 SHELL
 
 end

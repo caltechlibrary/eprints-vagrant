@@ -13,14 +13,20 @@ They are provided here as reference.  You could perform them on manually if you 
         libterm-readkey-perl libmime-lite-perl libmime-types-perl libdigest-sha-perl libdbd-mysql-perl libxml-parser-perl libxml2-dev \
         libxml-twig-perl libarchive-any-perl libjson-perl lynx wget ghostscript xpdf antiword elinks pdftk texlive-base texlive-base-bin \
         psutils imagemagick adduser tar gzip mysql-server mysql-client unzip libsearch-xapian-perl \
-        autoconf autoconf-archive git -y
+        autoconf autoconf-archive git curl -y
 ```
 
 ### Create EPrints user/group
 
 ```shell
-    sudo useradd --system --create-home --user-group eprints
+    sudo useradd eprints
 ```        
+
+### Download the EPrints v3.3.15 tar ball
+
+```shell
+    curl -O http://files.eprints.org/1073/2/eprints-3.3.15.tar.gz
+```
 
 Now you should be ready for the final manual bits.
 
