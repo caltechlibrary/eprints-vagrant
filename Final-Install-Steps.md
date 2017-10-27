@@ -12,7 +12,7 @@ They are provided here as reference.  You could perform them on manually if you 
     sudo apt-get install perl libncurses5 libselinux1 libsepol1 apache2 libapache2-mod-perl2 libxml-libxml-perl libunicode-string-perl \
         libterm-readkey-perl libmime-lite-perl libmime-types-perl libdigest-sha-perl libdbd-mysql-perl libxml-parser-perl libxml2-dev \
         libxml-twig-perl libarchive-any-perl libjson-perl lynx wget ghostscript xpdf antiword elinks pdftk texlive-base texlive-base-bin \
-        psutils imagemagick adduser tar gzip mariadb-server mariadb-client unzip libsearch-xapian-perl \
+        psutils imagemagick adduser tar gzip mysql-server mysql-client unzip libsearch-xapian-perl \
         autoconf autoconf-archive git -y
 ```
 
@@ -26,11 +26,35 @@ Now you should be ready for the final manual bits.
 
 ## The Final Steps
 
+### Configure MySQL access
+
+The EPrints create script will expect to use an account (e.g. root)
+for setting and install its database.  It expects a password so
+you need to setup before proceeding to install EPrints from source.
+
+In the example SQL statement below the DB Admin account is assumed to be
+root and password SOME_MIGHTY_SECRET. These are ONLY examples
+and you should pick what is appropriate for your machine. The sql command
+can usually be run from the SQL shell (e.g. mysql client) from a privileged
+account like _root_.
+
+```
+    USE mysql;
+    UPDATE user SET Password = PASSWORD('SOME_MIGHTY_SECRET') WHERE User = 'root' AND Host = 'localhost';
+    FLUSH PRIVILEGES;
+```
+
+
+
 ### Now install EPrints from source
 
 These steps are run as root (e.g. `sudo su`).
 
 ```shell
+    # NOTE: Stop to setup MySQL access from eprints account
+    # Usually you need to set password for the admin user of MySQL
+    # and note it for when you are prompted in the script on
+    # epadmin create.
     git clone https://github.com/eprints/eprints.git /opt/eprints3
     cd /opt/eprints3
     git checkout tags/v3.3.15
@@ -38,7 +62,6 @@ These steps are run as root (e.g. `sudo su`).
     automake --add-missing
     autoconf
     ./configure --prefix=$PWD
-    # FIXME: Need to setup MariaDB access from eprints account
     chown -R eprints:eprints .
     su eprints
     ./bin/epadmin create
@@ -56,11 +79,11 @@ After creating an E-Prints repository and updating /etc/hosts file restart apach
     systemctl restart apache2.service
 ```
 
-The EPrints configuration still interact with your MariaDB install. Makesure
+The EPrints configuration still interact with your MySQL install. Makesure
 it is still up.
 
 ```shell
-    systemctl restart mariadb.service
+    systemctl restart mysql.service
 ```
 
 Point your browser at your EPrints and install for testing/development.
