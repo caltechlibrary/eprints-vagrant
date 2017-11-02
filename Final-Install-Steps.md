@@ -19,7 +19,7 @@ They are provided here as reference.  You could perform them on manually if you 
         libterm-readkey-perl libmime-lite-perl libmime-types-perl libdigest-sha-perl libdbd-mysql-perl libxml-parser-perl libxml2-dev \
         libxml-twig-perl libarchive-any-perl libjson-perl lynx wget ghostscript xpdf antiword elinks pdftk texlive-base texlive-base-bin \
         psutils imagemagick adduser tar gzip mysql-server mysql-client unzip libsearch-xapian-perl \
-        autoconf autoconf-archive git -y
+        autoconf autoconf-archive git curl -y
 ```
 
 ## The Final Steps
@@ -31,6 +31,12 @@ These are the steps you need to take after VM is running.
 ```shell
     sudo useradd eprints
 ```        
+
+### Download the EPrints v3.3.15 tar ball
+
+```shell
+    curl -O http://files.eprints.org/1073/2/eprints-3.3.15.tar.gz
+```
 
 Now you should be ready for the final manual bits.
 
@@ -47,7 +53,7 @@ This is a transcript of the steps after `vagrant ssh`
     apt-get install eprints
 ```
 
-## Additional Options for your vagrant Host machine
+### Additional Options for your vagrant Host machine
 
 In the _epadmin create_ process you'll create the MariaDB database setup but
 also generate the Apache Virtual Host include information. It is important that
