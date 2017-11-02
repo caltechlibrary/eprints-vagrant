@@ -32,12 +32,6 @@ These are the steps you need to take after VM is running.
     sudo useradd eprints
 ```        
 
-### Download the EPrints v3.3.15 tar ball
-
-```shell
-    curl -O http://files.eprints.org/1073/2/eprints-3.3.15.tar.gz
-```
-
 Now you should be ready for the final manual bits.
 
 1. Add the debian repo to /etc/apt/source.list.d/eprints.list
