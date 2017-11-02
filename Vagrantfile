@@ -74,7 +74,8 @@ Vagrant.configure("2") do |config|
   #
   config.vm.network "private_network", type: "dhcp"
 
-  config.vm.box = "ubuntu/xenial64"
+  # EPrints v3.3.15 Install manual and debian package expected Ubuntu 14.04 or Debian 7.0
+  config.vm.box = "ubuntu/trusty64"
   config.vm.provider "virtualbox" do |vb|
    # Display the VirtualBox GUI when booting the machine
    vb.gui = false
@@ -91,9 +92,8 @@ Vagrant.configure("2") do |config|
     apt-get install -y perl libncurses5 libselinux1 libsepol1 apache2 libapache2-mod-perl2 libxml-libxml-perl libunicode-string-perl \
         libterm-readkey-perl libmime-lite-perl libmime-types-perl libdigest-sha-perl libdbd-mysql-perl libxml-parser-perl libxml2-dev \
         libxml-twig-perl libarchive-any-perl libjson-perl lynx wget ghostscript xpdf antiword elinks pdftk texlive-base texlive-base-bin \
-        psutils imagemagick adduser tar gzip mariadb-server mariadb-client unzip libsearch-xapian-perl \
+        psutils imagemagick adduser tar gzip mysql-server mysql-client unzip libsearch-xapian-perl \
         git autoconf autoconf-archive aptitude
-    useradd --system --create-home --user-group eprints
 SHELL
 
 end
