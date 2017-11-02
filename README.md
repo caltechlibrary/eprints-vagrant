@@ -26,5 +26,5 @@ On my development box
     vagrant ssh
 ```
 
-Follow the instructions in [Final-Install-Steps.md](Final-Install-Steps.md]
+Then follow the instructions in [final install steps](Final-Install-Steps.md)
 
