@@ -35,6 +35,13 @@ additional inputs. Accept the defaults. Then proceed to update your local
 /etc/hosts on both your dev box and vagrant VM so the rest of EPrints'
 install process will work easily.
 
+Make a note of the usernames/password setup during the installation process
+for your MySQL and EPrints installation.
+
+In a development environment isolated from the rest of the internet you can
+also leverage setting up sudousers and a local .my.cnf for moving around the
+system without getting prompted for passwords at every turn.
+
 ### Additional Options for your vagrant Host machine
 
 In the _epadmin create_ process you'll create the MariaDB database setup but
