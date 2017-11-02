@@ -17,13 +17,8 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "shell", inline: <<-SHELL
+    echo "deb http://deb.eprints.org/ stable/" > /etc/apt/sources.list.d/eprints.list
     apt-get update
-#    apt-get upgrade -y
-#    apt-get install -y perl libncurses5 libselinux1 libsepol1 apache2 libapache2-mod-perl2 libxml-libxml-perl libunicode-string-perl \
-#        libterm-readkey-perl libmime-lite-perl libmime-types-perl libdigest-sha-perl libdbd-mysql-perl libxml-parser-perl libxml2-dev \
-#        libxml-twig-perl libarchive-any-perl libjson-perl lynx wget ghostscript xpdf antiword elinks pdftk texlive-base texlive-base-bin \
-#        psutils imagemagick adduser tar gzip mysql-server mysql-client unzip libsearch-xapian-perl \
-#        git autoconf autoconf-archive aptitude
 SHELL
 
 end

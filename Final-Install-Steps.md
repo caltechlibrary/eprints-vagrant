@@ -1,26 +1,20 @@
 
 # EPrints v3.3.15 Install Notes
 
-This vagrant file setups up Ubuntu 14.04 LTS because that is the last one that has clear install instructions for EPrints v3.3.15.
-When testing Ubuntu 16.04 problems were not resolved by the linked version on the [wiki instruction page](http://wiki.eprints.org/w/Installing_EPrints_on_Debian/Ubuntu).
+This vagrant file setups up Ubuntu 14.04 LTS because that is the last one that
+has clear install instructions for EPrints v3.3.15. When testing Ubuntu 16.04
+problems were not resolved by the linked version on the [wiki instruction page](http://wiki.eprints.org/w/Installing_EPrints_on_Debian/Ubuntu).
 
-Make sure you running the latest Vagrant. Clear out any stale cached boxes if necessary.
+Make sure you running the latest Vagrant. Clear out any stale cached boxes if
+necessary.
 
 
 ## Inline steps taken by the Vagrant file
 
-The following are done by the `vagrant up` command via in-line shell directive in Vagrantfile. 
-They are provided here as reference.  You could perform them on manually if you needed.
+Installs a vanilla Ubuntu 14.04 LTS machine. Additionall it does add the eprints
+debian repository to /etc/apt/sources.lists.d/eprints.list
+and runs `apt-get update`. This could be done manually.
 
-### Install required software
-
-```shell
-    sudo apt-get install perl libncurses5 libselinux1 libsepol1 apache2 libapache2-mod-perl2 libxml-libxml-perl libunicode-string-perl \
-        libterm-readkey-perl libmime-lite-perl libmime-types-perl libdigest-sha-perl libdbd-mysql-perl libxml-parser-perl libxml2-dev \
-        libxml-twig-perl libarchive-any-perl libjson-perl lynx wget ghostscript xpdf antiword elinks pdftk texlive-base texlive-base-bin \
-        psutils imagemagick adduser tar gzip mysql-server mysql-client unzip libsearch-xapian-perl \
-        autoconf autoconf-archive git curl -y
-```
 
 ## The Final Steps
 
@@ -32,20 +26,14 @@ These are the steps you need to take after VM is running.
     sudo useradd eprints
 ```        
 
-Now you should be ready for the final manual bits.
+Now you should be ready to install eprints v3.3.15 and its required software.
+After `vagrant ssh` run `sudo apt-get install eprints`. Answer 'Y' when prompted
+about installing software and accepting an unsigned package.
 
-1. Add the debian repo to /etc/apt/source.list.d/eprints.list
-2. apt-get update
-3. apt-get install eprints
-
-This is a transcript of the steps after `vagrant ssh`
-
-```shell
-    sudo su
-    echo "deb http://deb.eprints.org/ stable/" > /etc/apt/sources.list.d/eprints.list
-    apt-get update
-    apt-get install eprints
-```
+This will install a bunch of software. Some, like MySQL, will prompt for
+additional inputs. Accept the defaults. Then proceed to update your local
+/etc/hosts on both your dev box and vagrant VM so the rest of EPrints'
+install process will work easily.
 
 ### Additional Options for your vagrant Host machine
 
@@ -73,3 +61,44 @@ Then on my local development I also did
 At this point I could point my web browser at http://lemurprints.local and
 start working with E-Prints.
 
+#### And Finally ...
+
+Per the console message when you did `apt-get` you'll need to do the following
+and create your development EPrints repository.
+
+```shell
+    ###################################################################
+    ##                                                               ##
+    ##                    Welcome to EPrints 3                       ##
+    ##                                                               ##
+    ###################################################################
+    ##                                                               ##
+    ## For known issues please check:                                ##
+    ##     http://wiki.eprints.org/w/Debian_Known_Issues             ##
+    ##                                                               ##
+    ## Getting Started:                                              ##
+    ##        Before you can start using eprints you need to         ##
+    ## configure your install, follow these simple steps:            ##
+    ##                                                               ##
+    ##  # su eprints                                                 ##
+    ##        You have to logged in as the eprints user to operate   ##
+    ##        with eprints                                           ##
+    ##  # cd                                                         ##
+    ##        To the eprints home directory (/usr/share/eprints3)    ##
+    ##                                                               ##
+    ##  # ./bin/epadmin create                                       ##
+    ##        Follow the instruction to create your archive.         ##
+    ##                                                               ##
+    ##  # exit                                                       ##
+    ##                                                               ##
+    ##  # a2ensite eprints                                           ##
+    ##                                                               ##
+    ##  # apache2ctl restart                                         ##
+    ##                                                               ##
+    ##                         ##### DONE #####                      ##
+    ##                                                               ##
+    ##  For more documentation please see the eprints wiki:          ##
+    ##           http://wiki.eprints.org/w/Documentation             ##
+    ##                                                               ##
+    ###################################################################
+```
