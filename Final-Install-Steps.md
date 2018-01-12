@@ -20,12 +20,16 @@ and runs `apt-get update`. This could be done manually.
 
 These are the steps you need to take after VM is running.
 
-### Create EPrints user/group
+### Install Eprints 
 
 FIXME: This useradd probably should include options to prevent eprints as a login account...
 
 ```shell
+    vagrant ssh
     sudo useradd eprints
+    sudo apt update
+    sudo apt upgrade
+    sudo apt-get install eprints
 ```        
 
 Now you should be ready to install eprints v3.3.15 and its required software.
@@ -53,7 +57,7 @@ assigned by Virtual Box to my /etc/hosts on both the vagrant instance and my
 development machine. In my case the ip address was 172.28.128.3 and I had
 named my repository host lemurprints.local. On my vagrant host I did
 
-```
+```shell
     sudo su
     echo "172.28.128.3 lemurprints.local lemurprints" >> /etc/hosts
     exit
@@ -61,7 +65,7 @@ named my repository host lemurprints.local. On my vagrant host I did
 
 Then on my local development I also did
 
-```
+```shell
     sudo su
     echo "172.28.128.3 lemurprints.local lemurprints" >> /etc/hosts
     exit
