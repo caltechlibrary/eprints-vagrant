@@ -51,3 +51,17 @@ Now copy the customizations into place (I've assumed here the dev instances' rep
     bash deploy-customizations.bash authors authorsdev
 ```
 
+Now you need to make sure any added schema or other changes from vanilla EPrints  are made
+
+```shell
+    sudo su eprints
+    /usr/share/eprints3/bin/epadmin update authorsdev
+    /usr/share/eprints3/bin/epadmin reload authorsdev
+    exit
+    sudo /etc/init.d/apache2 stop
+    sudo /etc/init.d/apache2 start
+```
+
+Test and debug any missing customization from here.
+
+
