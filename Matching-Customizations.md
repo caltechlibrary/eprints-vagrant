@@ -2,7 +2,12 @@
 # Matching field customization
 
 In our various EPrint repositories we have customized fields (e.g. CaltechAUTHORS, CaltechTHESIS). If you are bringing up
-a development instance of EPrints you need to bring that customization along with you.  This can be done is several steps.
+a development instance of an existing EPrints Repository you need to bring that customizations along with you.  Mostly customizations
+are found under the REPO_ID's cfg but if you have an old EPrints repository things might also be changed in the `perl_lib` directory
+tree as well. This document is about handling the later scenarios. It assumes the production instance is the same version of the
+development instance (e.g. production is v3.3.15 and development is setup as v3.3.15).
+
+Normal process:
 
 1. Copy the following to your Vagrant instance to your development vagrant directory (usually under your REPO ID)
     + `<archivepath>/archives/<archivename>/cfg/cfg.d/eprint_fields.pl` (this defines your fields) 
@@ -17,6 +22,11 @@ a development instance of EPrints you need to bring that customization along wit
 3. Copy from `/vagrant/<archivename>/*` to where EPrints is setup in the vagrant instance (e.g. `/usr/shared/eprints/archives/`)
 4. Reload the customization, WARNING: This triggers changes to the MySQL table schema!!!!
     + `<archivepath>/bin/epadmin reload <archivename>` (run this command)
+
+Extended process:
+
+In our extended case we need to also copy the files in `<archivepath>/perl_lib/EPrints/Plugin` so we pickup customizations in unsual places.
+The import/deploy scripts referenced below will do their best to include this.
 
 Here is a general example for an "authors" style repository.
 
@@ -35,9 +45,9 @@ Start up Vagrant with EPrints and ssh into it
     vagrant ssh
 ```
 
-Now copy the customizations into place.
+Now copy the customizations into place (I've assumed here the dev instances' repo id is authorsdev). 
 
 ```shell
-    bash deploy-customizations.bash authors
+    bash deploy-customizations.bash authors authorsdev
 ```
 

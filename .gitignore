@@ -2,3 +2,6 @@
 *.log
 *.swp
 *~
+eprints3-customizations
+*authors
+*thesis
