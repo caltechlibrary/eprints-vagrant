@@ -8,8 +8,10 @@ copying ${SOURCE_REPO_ID} to /usr/share/eprints3/archives/${DEV_REPO_ID}
 EOF
 	sudo cp -vpR "${SOURCE_REPO_ID}"/* "/usr/share/eprints3/archives/${DEV_REPO_ID}/"
 	sudo chown -R "eprints" "/usr/share/eprints3/archives/${DEV_REPO_ID}"
-    sudo cp -vpR "eprints3-cgi/cgi/users/lookup/"* "/usr/share/eprints3/cgi/users/lookup/"
+    sudo cp -vpR "eprints3-customizations/cgi/users/lookup/"* "/usr/share/eprints3/cgi/users/lookup/"
+    sudo cp -vpR "eprints3-customizations/perl_lib/"* "/usr/share/eprints3/perl_lib/"
 	sudo chown -R "eprints" "/usr/share/eprints3/cgi/users/lookup"
+	sudo chown -R "eprints" "/usr/share/eprints3/perl_lib/
 }
 if [ "$#" != "2" ]; then
 	cat <<EOF

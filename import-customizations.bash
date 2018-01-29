@@ -14,16 +14,21 @@ EOF
 	scp -r "${HOST}:${EPRINT_PATH}/archives/${REPO_ID}/${TARGET}" "${REPO_ID}/${TARGET}"
 }
 
-function importCGICustomizations() {
+function importInCommonCustomizations() {
 	HOST="$1"
 	EPRINT_PATH="$2"
-    TARGET="$3"
-	mkdir -p "eprints3-cgi/${TARGET}"
+	TARGET="cgi/users/lookup" 
+	mkdir -p "eprints3-customizations/${TARGET}"
 	cat <<EOF
-scp -r "${HOST}:${EPRINT_PATH}/${TARGET}" "eprints3-cgi/${TARGET}"
+scp -r "${HOST}:${EPRINT_PATH}/${TARGET}" "eprints3-customizations/${TARGET}"
 EOF
-    DNAME=$(dirname "${TARGET}")
-	scp -r "${HOST}:${EPRINT_PATH}/${TARGET}" "eprints3-cgi/${DNAME}/"
+    	DNAME=$(dirname "${TARGET}")
+	scp -r "${HOST}:${EPRINT_PATH}/${TARGET}" "eprints3-customizations/${DNAME}/"
+
+	TARGET="perl_lib/EPrints/MetaField/Literaltext.pm"
+	DNAME=$(dirname "${TARGET}")
+	mkdir -p "eprints3-customizations/${DNAME}"
+	scp -r "${HOST}:${EPRINT_PATH}/${TARGET}" "eprints3-customizations/${DNAME}/"
 }
 
 if [ "$#" != "3" ]; then
@@ -42,4 +47,5 @@ importCustomization "$1" "$2" "$3" "cfg/lang/en/phrases/eprint_fields.xml"
 importCustomization "$1" "$2" "$3" "cfg/workflows/eprint/default.xml"
 importCustomization "$1" "$2" "$3" "cfg/cfg.d/eprint_render.pl"
 importCustomization "$1" "$2" "$3" "cfg/cfg.d/search.pl"
-importCGICustomizations "$1" "$2" "cgi/users/lookup"
+importInCommonCustomizations "$1" "$2"
+importInCommonCustomizations "$1" "$2" 
