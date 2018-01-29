@@ -9,7 +9,8 @@ function deployCustomizations() {
 	sudo chown -R "eprints" "/usr/share/eprints3/archives/${DEV_REPO_ID}"
 	# System wide customizations
 	sudo cp -vpR "eprints3-customizations/cgi/users/lookup/"* "/usr/share/eprints3/cgi/users/lookup/"
-	sudo cp -ivpR "eprints3-customizations/perl_lib/"* "/usr/share/eprints3/perl_lib/"
+	#sudo cp -ivpR "eprints3-customizations/perl_lib/"* "/usr/share/eprints3/perl_lib/"
+	sudo cp -vpR "eprints3-customizations/perl_lib/"* "/usr/share/eprints3/perl_lib/"
 	sudo chown -R "eprints" "/usr/share/eprints3"
 }
 

@@ -46,6 +46,13 @@ function importPlugins() {
 		mkdir -p "${DNAME}"
 		scp -r "${HOST}:${EPRINT_PATH}/archives/${TARGET}" "${DNAME}/"
 	done
+
+    # Copy system wide plugins (test based on CaltechAUTHORS)
+    for TARGET in "perl_lib/EPrints/Plugin/Screen"; do
+		DNAME=$(dirname "${TARGET}")
+		mkdir -p "eprints3-customizations/${DNAME}"
+		scp -r "${HOST}:${EPRINT_PATH}/${TARGET}" "eprints3-customizations/${DNAME}/"
+    done
 }
 
 if [ "$#" != "3" ]; then
