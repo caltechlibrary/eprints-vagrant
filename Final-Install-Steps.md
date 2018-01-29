@@ -166,5 +166,11 @@ Depending on your goals you take the following approach to updating *user_roles.
 	+ `+/subjects/rest/get`
 	+ `+/subjects/rest/put`
 
+## Next Steps
+
+
+See [Matching-Customization.md](Matching-Customization.md) if are trying to re-create a customized EPrints instance
+
+See [Importing-Test-Data.md](Importing-Test-Data.html) for strategies on importing test data for testing EPrints
 
 
