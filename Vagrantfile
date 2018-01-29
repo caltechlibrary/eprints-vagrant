@@ -16,6 +16,7 @@ Vagrant.configure("2") do |config|
    vb.customize ["modifyvm", :id, "--vram", "128"]
   end
 
+  # Setup for basic EPrints install based on Caltech Library deployments.
   config.vm.provision "shell", inline: <<-SHELL
     echo "deb http://deb.eprints.org/ stable/" > /etc/apt/sources.list.d/eprints.list
     apt-get update

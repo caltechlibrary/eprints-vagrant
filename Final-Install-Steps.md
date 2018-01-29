@@ -22,13 +22,17 @@ These are the steps you need to take after VM is running.
 
 ### Install Eprints 
 
-FIXME: This useradd probably should include options to prevent eprints as a login account...
+FIXME: This useradd probably should include options to prevent eprints being used 
+as a login account...
 
 ```shell
     vagrant ssh
     sudo useradd eprints
-    sudo apt update
-    sudo apt upgrade
+    sudo apt upgrade -y
+    # Install some Perl libraries needed by Bizzar Plugins
+    sudo apt install libbiblio-citation-parser-perl libdate-calc-perl libgeo-ip-perl \
+         libgeo-ipfree-perl libdigest-hmac-perl
+    # Finally install EPrints
     sudo apt install eprints
 ```        
 
