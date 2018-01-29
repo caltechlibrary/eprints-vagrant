@@ -13,7 +13,7 @@ necessary.
 
 Installs a vanilla Ubuntu 14.04 LTS machine. Additionall it does add the eprints
 debian repository to /etc/apt/sources.lists.d/eprints.list
-and runs `apt-get update`. This could be done manually.
+and runs `apt update`. This could be done manually.
 
 
 ## The Final Steps
@@ -29,7 +29,7 @@ FIXME: This useradd probably should include options to prevent eprints as a logi
     sudo useradd eprints
     sudo apt update
     sudo apt upgrade
-    sudo apt-get install eprints
+    sudo apt install eprints
 ```        
 
 Now you should be ready to install eprints v3.3.15 and its required software.
