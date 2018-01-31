@@ -7,6 +7,6 @@
 
 ## Optional configurations
 
-+ Setup [REST Access](REST-Access.md)
-+ Setup any [Customizations](Matching-Customizations.md)
++ [Customizations](Matching-Customizations.md)
++ [REST Access](REST-Access.md)
 

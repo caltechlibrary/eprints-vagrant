@@ -49,6 +49,6 @@ Depending on your goals you take the following approach to updating *user_roles.
 
 ## Optional configurations
 
-+ Setup any [Customizations](Matching-Customizations.md)
-+ Setup [Test Data](Importing-Test-Data.html)
++ [Customizations](Matching-Customizations.md)
++ [Test Data](Importing-Test-Data.html)
 

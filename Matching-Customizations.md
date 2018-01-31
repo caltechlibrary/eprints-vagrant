@@ -66,6 +66,6 @@ Test and debug any missing customization from here.
 
 ## Optional configurations
 
-+ Setup [REST Access](REST-Access.md)
-+ Setup [Test Data](Importing-Test-Data.html)
++ [REST Access](REST-Access.md)
++ [Test Data](Importing-Test-Data.html)
 

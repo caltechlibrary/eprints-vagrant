@@ -124,7 +124,7 @@ Check and see everything is running as expected.
 
 ## Optional configurations
 
-+ Setup [REST Access](REST-Access.md)
-+ Setup any [Customizations](Matching-Customizations.md)
-+ Setup [Test Data](Importing-Test-Data.html)
++ [Customizations](Matching-Customizations.md)
++ [REST Access](REST-Access.md)
++ [Test Data](Importing-Test-Data.html)
 
