@@ -23,4 +23,15 @@ EOF
 fi
 
 deployCustomizations "$1" "$2"
-echo "Now you should be ready to use epadmin reload on the repository"
+cat <<EOF
+
+Now will likely need to run the following from your vagrant session:
+
+    sudo su eprints
+    /usr/share/eprints3/bin/epadmin update ${DEV_REPO_ID}
+    /usr/share/eprints3/bin/epadmin reload ${DEV_REPO_ID}
+    exit
+    sudo /etc/init.d/apache2 restart
+
+EOF
+

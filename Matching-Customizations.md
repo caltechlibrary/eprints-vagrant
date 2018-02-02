@@ -64,4 +64,8 @@ Now you need to make sure any added schema or other changes from vanilla EPrints
 
 Test and debug any missing customization from here.
 
+## Optional configurations
+
++ [REST Access](REST-Access.md)
++ [Test Data](Importing-Test-Data.html)
 

@@ -28,7 +28,7 @@ Below is I added "rest" role to the admin role.
 
 ## eputil
 
-_eputil_ supports POST and PUT into EPrint's REST API. Content sent by the POST or PUT is assumed to be
+_eputil_ will eventually support POST and PUT into EPrint's REST API. Content sent by the POST or PUT is assumed to be
 encoded before it is read from a file or standard input. In the example below the base we are "putting"
 the value (TRUE) into the lemurprints.local/authors EPrint collection for record 1's referreed field.
 
