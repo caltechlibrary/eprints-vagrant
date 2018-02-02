@@ -75,3 +75,5 @@ importCustomization "$1" "$2" "$3" "cfg/cfg.d/eprint_render.pl"
 importCustomization "$1" "$2" "$3" "cfg/cfg.d/search.pl"
 importInCommonCustomizations "$1" "$2"
 importPlugins "$1" "$2" "$3"
+# Make an zip file of these customizations
+zip -r "$3"-customizations.zip "$3" eprints3-customizations
