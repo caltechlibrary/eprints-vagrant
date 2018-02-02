@@ -5,3 +5,5 @@
 eprints3-customizations
 *authors
 *thesis
+*.zip
+*.dataset
