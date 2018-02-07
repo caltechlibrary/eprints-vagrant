@@ -32,7 +32,7 @@ as a login account...
     sudo apt-get upgrade -y
     # Install some Perl libraries needed by Bizzar Plugins
     sudo apt-get install libbiblio-citation-parser-perl libdate-calc-perl libgeo-ip-perl \
-         libgeo-ipfree-perl libdigest-hmac-perl perl-doc
+         libgeo-ipfree-perl libdigest-hmac-perl perl-doc tree
     # Finally install EPrints
     sudo apt-get install eprints
 ```        
