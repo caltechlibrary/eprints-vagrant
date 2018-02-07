@@ -29,12 +29,12 @@ as a login account...
 ```shell
     vagrant ssh
     sudo useradd eprints
-    sudo apt upgrade -y
+    sudo apt-get upgrade -y
     # Install some Perl libraries needed by Bizzar Plugins
-    sudo apt install libbiblio-citation-parser-perl libdate-calc-perl libgeo-ip-perl \
+    sudo apt-get install libbiblio-citation-parser-perl libdate-calc-perl libgeo-ip-perl \
          libgeo-ipfree-perl libdigest-hmac-perl perl-doc
     # Finally install EPrints
-    sudo apt install eprints
+    sudo apt-get install eprints
 ```        
 
 Now you should be ready to install eprints v3.3.15 and its required software.
