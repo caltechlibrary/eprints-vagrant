@@ -27,8 +27,8 @@ function importInCommonCustomizations() {
     done
 
 	# Copy missing Literaltext.pm (based on tests with CaltechAUTHORS) into our dev site_lib directory
-	#mkdir -p "eprints3-customizations/perl_lib/EPrints/MetaField"
-	#scp -r "${HOST}:${EPRINT_PATH}/perl_lib/EPrints/MetaField/Literaltext.pm" "eprints3-customizations/perl_lib/EPrints/MetaField/Literaltext.pm"
+	mkdir -p "eprints3-customizations/perl_lib/EPrints/MetaField"
+	scp -r "${HOST}:${EPRINT_PATH}/perl_lib/EPrints/MetaField/Literaltext.pm" "eprints3-customizations/perl_lib/EPrints/MetaField/Literaltext.pm"
     #if [ "$?" = "0" ]; then
     #    scp -r "${HOST}:${EPRINT_PATH}/perl_lib/EPrints/MetaField.pm" "eprints3-cusotmizations/perl_lib/EPrints/"
     #fi
