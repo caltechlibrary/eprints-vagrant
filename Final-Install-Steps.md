@@ -1,50 +1,110 @@
 
-# EPrints v3.3.15 Install Notes
+# EPrints v3.4 Install Notes
 
-This vagrant file setups up Ubuntu 14.04 LTS because that is the last one that
-has clear install instructions for EPrints v3.3.15. When testing Ubuntu 16.04
-problems were not resolved by the linked version on the 
-[wiki instruction page](http://wiki.eprints.org/w/Installing_EPrints_on_Debian/Ubuntu).
-
+This vagrant file setups up Ubuntu 18.04 LTS in preparation to install EPrints v3.4.x.
 Make sure you running the latest Vagrant. Clear out any stale cached boxes if
 necessary.
 
 
-## Inline steps taken by the Vagrant file
+## After your vagrant instance is up and running
 
-Installs a vanilla Ubuntu 14.04 LTS machine. Additionall it does add the eprints
-debian repository to /etc/apt/sources.lists.d/eprints.list
-and runs `apt update`. This could be done manually.
+Install the following Debian packages to support EPrints
+
+### Development tools needed 
+
+```
+    sudo apt update
+    sudo apt upgrade
+    sudo apt install build-essential autoconf automake libtool
+```
+
+### EPrints required and suggested packages
+
+These were ones I found I needed to add to get things working.
+
+```
+    sudo apt install apache2 \
+        libdbi-perl \
+        libjson-pp-perl \
+        libcgi-fast-perl libcgi-pm-perl \
+        libcgi-test-perl libfcgi-perl \
+        libxml-libxml-perl \
+        libclass-dbi-mysql-perl \
+        libcrypt-mysql-perl \
+        libdatetime-format-mysql-perl \
+        libdbd-mysql-perl \
+        libtime-piece-mysql-perl \
+        mariadb-server mariadb-client
+    sudo a2enmod cgi
+    sudo systemctl restart apache2
+```
 
 
-## The Final Steps
+The following I found in the EPrints Wiki
 
-These are the steps you need to take after VM is running.
+    https://wiki.eprints.org/w/Installing_EPrints_on_Debian/Ubuntu
 
-### Install Eprints 
+NOTE: I've removed the MySQL server/client install from the list because I 
+have already installed MariaDB instead.
 
-FIXME: This useradd probably should include options to prevent eprints being used 
-as a login account...
+```
+    sudo apt install perl libncurses5 libselinux1 libsepol1 apache2 \
+        libapache2-mod-perl2 libxml-libxml-perl libunicode-string-perl \
+        libterm-readkey-perl libmime-lite-perl libmime-types-perl \
+        libdigest-sha-perl libdbd-mysql-perl libxml-parser-perl libxml2-dev \
+        libxml-twig-perl libarchive-any-perl libjson-perl lynx wget \
+        ghostscript xpdf antiword elinks texlive-base texlive-base-bin \
+        psutils imagemagick adduser tar gzip \
+        unzip libsearch-xapian-perl 
+```
 
-```shell
-    vagrant ssh
-    sudo useradd eprints
-    sudo apt-get upgrade -y
-    # Install some Perl libraries needed by Bizzar Plugins
-    sudo apt-get install libbiblio-citation-parser-perl libdate-calc-perl libgeo-ip-perl \
-         libgeo-ipfree-perl libdigest-hmac-perl perl-doc tree
-    # Finally install EPrints
-    sudo apt-get install eprints
-```        
+Depending on the EPrints plugins you want, you may need to install.
 
-Now you should be ready to install eprints v3.3.15 and its required software.
-After `vagrant ssh` run `sudo apt-get install eprints`. Answer 'Y' when prompted
-about installing software and accepting an unsigned package.
+```
+    sudo apt install libbiblio-citation-parser-perl libdate-calc-perl \
+        libgeo-ip-perl libgeo-ipfree-perl \
+        libdigest-hmac-perl perl-doc
+```
 
-This will install a bunch of software. Some, like MySQL, will prompt for
-additional inputs. Accept the defaults. Then proceed to update your local
-/etc/hosts on both your dev box and vagrant VM so the rest of EPrints'
-install process will work easily.
+EPrints specific configuration
+
++ Clone EPrints v3.4 from the Github repository
++ Change directory into your cloned repository
++ Check out v3.4.0
++ Create a target deployment directory (e.g. /coda at Caltech Library)
++ Make sure an eprints user is created before building EPrints
++ Run `autoreconf -i` and generate the ./configure script by running 
++ Run `./configure` with the options for your target deployment
++ Run `make`
++ Run `sudo make install`
+
+```
+    sudo adduser --disabled-login eprints
+    git clone https://github.com/eprints/eprints3.4.git src/eprints3.4
+    cd src/eprints3.4
+    autoreconf -i
+    ./configure --prefix=/coda/eprints3-4
+    make
+    sudo make install
+```
+
+NOTE: bin/epadmin will fail under Ubuntu 18.04 LTS's Perl environment. You 
+MUST follow the instructions in the Wiki for Ubuntu 18.04 LTS 
+to fix bin/epadmin as well as setup DB access for configuring the database.
+
++ Fix bin/epadmin lines per Wiki: https://wiki.eprints.org/w/Installing_EPrints_on_Debian/Ubuntu
++ Add `eprints` user to MariaDB, set password, grant permissions
+    + NOTE: You must change the "changeme" strings to an appropraite password!!!
+
+```sql
+    CREATE USER 'eprints'@'localhost' IDENTIFIED by 'changeme';
+    GRANT ALL PRIVILEGES ON *.* TO 'eprints'@'localhost' WITH GRANT OPTION;
+    UPDATE User SET Password = PASSWORD('changeme') WHERE User = 'eprints';
+    FLUSH PRIVILEGES;
+```
+
+
+## EPrints Configuration
 
 Make a note of the usernames/password setup during the installation process
 for your MySQL and EPrints installation.

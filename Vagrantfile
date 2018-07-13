@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", type: "dhcp"
 
   # EPrints v3.3.15 Install manual and debian package expected Ubuntu 14.04 or Debian 7.0
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/bionic64"
   config.vm.provider "virtualbox" do |vb|
    # Display the VirtualBox GUI when booting the machine
    vb.gui = false
@@ -17,9 +17,9 @@ Vagrant.configure("2") do |config|
   end
 
   # Setup for basic EPrints install based on Caltech Library deployments.
-  config.vm.provision "shell", inline: <<-SHELL
-    echo "deb http://deb.eprints.org/ stable/" > /etc/apt/sources.list.d/eprints.list
-    apt-get update
-SHELL
+  #config.vm.provision "shell", inline: <<-SHELL
+  #  echo "deb http://deb.eprints.org/ stable/" > /etc/apt/sources.list.d/eprints.list
+  #  apt-get update
+#SHELL
 
 end
