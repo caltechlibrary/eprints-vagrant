@@ -16,6 +16,8 @@ Install the following Debian packages to support EPrints
     sudo apt update
     sudo apt upgrade
     sudo apt install build-essential autoconf automake libtool
+    sudo apt autoremove
+    sudo apt autoclean
 ```
 
 ### EPrints required and suggested packages
@@ -24,6 +26,7 @@ These were ones I found I needed to add to get things working.
 
 ```
     sudo apt install apache2 \
+        libapache2-mod-perl2 \
         libdbi-perl \
         libjson-pp-perl \
         libcgi-fast-perl libcgi-pm-perl \
@@ -35,7 +38,7 @@ These were ones I found I needed to add to get things working.
         libdbd-mysql-perl \
         libtime-piece-mysql-perl \
         mariadb-server mariadb-client
-    sudo a2enmod cgi
+    sudo a2enmod cgid
     sudo systemctl restart apache2
 ```
 
