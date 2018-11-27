@@ -9,15 +9,15 @@
 # Basic Ubuntu setup
 #
 sudo apt update
-sudo apt upgrade
-sudo apt install build-essential autoconf automake libtool
-sudo apt autoremove
+sudo apt -y upgrade
+sudo apt -y install build-essential autoconf automake libtool
+sudo apt -y autoremove
 sudo apt autoclean
 
 #
 # Minimal Requirements for LAMP
 #
-sudo apt install apache2 \
+sudo apt -y install apache2 \
     letsencrypt \
     libapache2-mod-perl2 \
     libdbi-perl \
@@ -37,7 +37,7 @@ sudo systemctl restart apache2
 #
 # Required for EPrints specific LAMP setup
 #
-sudo apt install perl libncurses5 libselinux1 libsepol1 apache2 \
+sudo apt -y install perl libncurses5 libselinux1 libsepol1 apache2 \
     libapache2-mod-perl2 libxml-libxml-perl libunicode-string-perl \
     libterm-readkey-perl libmime-lite-perl libmime-types-perl \
     libdigest-sha-perl libdbd-mysql-perl libxml-parser-perl libxml2-dev \
@@ -49,7 +49,7 @@ sudo apt install perl libncurses5 libselinux1 libsepol1 apache2 \
 #
 # Required for common EPrints plugins
 #
-sudo apt install libbiblio-citation-parser-perl libdate-calc-perl \
+sudo apt -y install libbiblio-citation-parser-perl libdate-calc-perl \
     libgeo-ip-perl libgeo-ipfree-perl \
     libdigest-hmac-perl perl-doc
 
@@ -57,6 +57,6 @@ sudo apt install libbiblio-citation-parser-perl libdate-calc-perl \
 #
 # Cleanup system
 #
-sudo apt autoremove
+sudo apt -y autoremove
 sudo apt autoclean
 
