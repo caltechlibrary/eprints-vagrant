@@ -84,6 +84,7 @@ EPrints specific configuration
 + Run `sudo make install`
 
 ```
+    sudo mkdir /coda
     sudo adduser --disabled-login eprints
     sudo adduser www-data eprints
     git clone https://github.com/eprints/eprints3.4.git src/eprints3.4
@@ -94,13 +95,11 @@ EPrints specific configuration
     sudo make install
 ```
 
-NOTE: bin/epadmin may fail under Ubuntu 18.04 LTS's Perl environment. 
-If so you MUST follow the instructions in the Wiki for Ubuntu 18.04 LTS 
-to fix bin/epadmin as well as setup DB access for configuring the database.
+### Setup MariaDB EPrints user
 
-+ If needed fix bin/epadmin lines per Wiki: https://wiki.eprints.org/w/Installing_EPrints_on_Debian/Ubuntu
-+ Add `eprints` user to MariaDB, set password, grant permissions
-    + NOTE: You must change the "changeme" strings to an appropraite password!!!
+Add `eprints` user to MariaDB, set password, grant permissions
+
++ NOTE: You must change the "changeme" strings to an appropraite password!!!
 
 ```sql
     CREATE USER 'eprints'@'localhost' IDENTIFIED by 'changeme';
@@ -109,10 +108,7 @@ to fix bin/epadmin as well as setup DB access for configuring the database.
     FLUSH PRIVILEGES;
 ```
 
-NOTE: Check the file permisions for directories and files under your
-EPrints installation. It is likely they will not match what you need for
-the apache user to access the directories. If so Add the Apache user
-to the eprints group created when you created your eprints account.
+NOTE: If needed fix bin/epadmin issues see Wiki: https://wiki.eprints.org/w/Installing_EPrints_on_Debian/Ubuntu
 
 ## EPrints Configuration
 
