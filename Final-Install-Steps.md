@@ -26,6 +26,7 @@ These were ones I found I needed to add to get things working.
 
 ```
     sudo apt install apache2 \
+        letsencrypt \
         libapache2-mod-perl2 \
         libdbi-perl \
         libjson-pp-perl \
@@ -91,8 +92,8 @@ EPrints specific configuration
     sudo make install
 ```
 
-NOTE: bin/epadmin will fail under Ubuntu 18.04 LTS's Perl environment. You 
-MUST follow the instructions in the Wiki for Ubuntu 18.04 LTS 
+NOTE: bin/epadmin may fail under Ubuntu 18.04 LTS's Perl environment. 
+If so you MUST follow the instructions in the Wiki for Ubuntu 18.04 LTS 
 to fix bin/epadmin as well as setup DB access for configuring the database.
 
 + Fix bin/epadmin lines per Wiki: https://wiki.eprints.org/w/Installing_EPrints_on_Debian/Ubuntu
