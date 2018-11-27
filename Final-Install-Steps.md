@@ -77,6 +77,7 @@ EPrints specific configuration
 + Check out v3.4.0
 + Create a target deployment directory (e.g. /coda at Caltech Library)
 + Make sure an eprints user is created before building EPrints
+    + The Apache user should also be included in the eprints group
 + Run `autoreconf -i` and generate the ./configure script by running 
 + Run `./configure` with the options for your target deployment
 + Run `make`
@@ -84,6 +85,7 @@ EPrints specific configuration
 
 ```
     sudo adduser --disabled-login eprints
+    sudo adduser www-data eprints
     git clone https://github.com/eprints/eprints3.4.git src/eprints3.4
     cd src/eprints3.4
     autoreconf -i
@@ -96,7 +98,7 @@ NOTE: bin/epadmin may fail under Ubuntu 18.04 LTS's Perl environment.
 If so you MUST follow the instructions in the Wiki for Ubuntu 18.04 LTS 
 to fix bin/epadmin as well as setup DB access for configuring the database.
 
-+ Fix bin/epadmin lines per Wiki: https://wiki.eprints.org/w/Installing_EPrints_on_Debian/Ubuntu
++ If needed fix bin/epadmin lines per Wiki: https://wiki.eprints.org/w/Installing_EPrints_on_Debian/Ubuntu
 + Add `eprints` user to MariaDB, set password, grant permissions
     + NOTE: You must change the "changeme" strings to an appropraite password!!!
 
@@ -107,6 +109,10 @@ to fix bin/epadmin as well as setup DB access for configuring the database.
     FLUSH PRIVILEGES;
 ```
 
+NOTE: Check the file permisions for directories and files under your
+EPrints installation. It is likely they will not match what you need for
+the apache user to access the directories. If so Add the Apache user
+to the eprints group created when you created your eprints account.
 
 ## EPrints Configuration
 
