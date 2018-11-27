@@ -149,47 +149,7 @@ Then on my local development I also did
 At this point I could point my web browser at http://lemurprints.local and
 start working with E-Prints.
 
-#### And Finally ...
-
-Per the console message when you did `apt-get` you'll need to do the following
-and create your development EPrints repository.
-
-```shell
-    ###################################################################
-    ##                                                               ##
-    ##                    Welcome to EPrints 3                       ##
-    ##                                                               ##
-    ###################################################################
-    ##                                                               ##
-    ## For known issues please check:                                ##
-    ##     http://wiki.eprints.org/w/Debian_Known_Issues             ##
-    ##                                                               ##
-    ## Getting Started:                                              ##
-    ##        Before you can start using eprints you need to         ##
-    ## configure your install, follow these simple steps:            ##
-    ##                                                               ##
-    ##  # su eprints                                                 ##
-    ##        You have to logged in as the eprints user to operate   ##
-    ##        with eprints                                           ##
-    ##  # cd                                                         ##
-    ##        To the eprints home directory (/usr/share/eprints3)    ##
-    ##                                                               ##
-    ##  # ./bin/epadmin create                                       ##
-    ##        Follow the instruction to create your archive.         ##
-    ##                                                               ##
-    ##  # exit                                                       ##
-    ##                                                               ##
-    ##  # a2ensite eprints                                           ##
-    ##                                                               ##
-    ##  # apache2ctl restart                                         ##
-    ##                                                               ##
-    ##                         ##### DONE #####                      ##
-    ##                                                               ##
-    ##  For more documentation please see the eprints wiki:          ##
-    ##           http://wiki.eprints.org/w/Documentation             ##
-    ##                                                               ##
-    ###################################################################
-```
+## And finally ...
 
 Check and see everything is running as expected. 
 
