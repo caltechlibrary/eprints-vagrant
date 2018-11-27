@@ -7,3 +7,5 @@ eprints3-customizations
 *thesis
 *.zip
 *.dataset
+src/*
+*.ds
