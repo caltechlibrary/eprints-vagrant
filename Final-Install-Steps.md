@@ -102,7 +102,7 @@ to fix bin/epadmin as well as setup DB access for configuring the database.
 ```sql
     CREATE USER 'eprints'@'localhost' IDENTIFIED by 'changeme';
     GRANT ALL PRIVILEGES ON *.* TO 'eprints'@'localhost' WITH GRANT OPTION;
-    UPDATE User SET Password = PASSWORD('changeme') WHERE User = 'eprints';
+    UPDATE user SET Password = PASSWORD('changeme') WHERE User = 'eprints';
     FLUSH PRIVILEGES;
 ```
 
